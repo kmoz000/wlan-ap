@@ -72,6 +72,14 @@ define Package/ath12k-wifi-sercomm-ap72tip/install
 	$(INSTALL_DATA) ./board-sercomm-ap72tip.bin.ipq53xx $(1)/lib/firmware/ath12k/IPQ5332/hw1.0/board.bin
 endef
 
+# define Package/ath12k-wifi-wallys-dr5332/install
+# 	$(INSTALL_DIR) $(1)/lib/firmware/ath12k/QCN92XX/hw1.0 $(1)/lib/firmware/ath12k/IPQ5332/hw1.0
+# 	$(INSTALL_DATA) ./regdb.bin $(1)/lib/firmware/ath12k/QCN92XX/hw1.0/
+# 	$(INSTALL_DATA) ./board-wallys-dr5332.bin.qcn9224 $(1)/lib/firmware/ath12k/QCN92XX/hw1.0/board.bin
+# 	$(INSTALL_DATA) ./regdb.bin $(1)/lib/firmware/ath12k/IPQ5332/hw1.0/
+# 	$(INSTALL_DATA) ./board-wallys-dr5332.bin.ipq53xx $(1)/lib/firmware/ath12k/IPQ5332/hw1.0/board.bin
+# endef
+
 $(eval $(call BuildPackage,ath12k-wifi-qcom-qcn9274))
 $(eval $(call BuildPackage,ath12k-wifi-cig-wf189))
 $(eval $(call BuildPackage,ath12k-wifi-edgecore-eap105))
