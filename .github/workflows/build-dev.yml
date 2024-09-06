@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [ 'wallys_dr5332', 'wallys_dr5018', 'wallys_dr6018', 'wallys_dr6018-v4', 'sercomm_ap72tip']
+        target: [ 'wallys_dr5332' ]
 
     steps:
     - name: Checkout
@@ -35,8 +35,10 @@ jobs:
 
         BASENAME="$(date +%Y%m%d)-$LOWERCASE_TARGET-main-$HASH"
         TAR_NAME="$BASENAME.tar.gz"
+        IMG_NAME="$BASENAME-upgrade.bin"
 
         echo "IMG_NAME=$IMG_NAME" >> $GITHUB_ENV  # Export IMG_NAME as an environment variable
+        echo "::set-output name=IMG_NAME::$IMG_NAME"  # Set output for use in next steps
 
         # Package the files
         tar cfz "openwrt/tmp/$TAR_NAME" -C openwrt/bin/targets/ .
@@ -50,6 +52,11 @@ jobs:
       run: |
         echo "Listing all .ipk and .bin files in openwrt/bin/:"
         find openwrt/bin/ -type f \( -name "*.ipk" -o -name "*.bin" \)
+    
+    - name: List all .ipk and .bin files in openwrt/tmp/
+      run: |
+        echo "Listing all .ipk and .bin files in openwrt/tmp/:"
+        find openwrt/tmp/ -type f \( -name "*.ipk" -o -name "*.bin" \)
 
     - name: Push to the latest release
       uses: softprops/action-gh-release@v2
@@ -60,5 +67,6 @@ jobs:
         files: |
           Release.txt
           openwrt/tmp/${{ steps.build_image.outputs.TAR_NAME }}
+          openwrt/tmp/${{ steps.build_image.outputs.IMG_NAME }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
