@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [ 'wallys_dr5332' ]
+        target: [ 'wallys_dr5332', 'wallys_dr5018', 'wallys_dr6018', 'wallys_dr6018-v4', 'sercomm_ap72tip']
 
     steps:
     - name: Checkout
