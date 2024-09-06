@@ -15,12 +15,21 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+     # Clean unnecessary files to save disk space
+    - name: clean unncessary files to save space
+      run: |
+        docker rmi `docker images -q`
 
+    - name: Build image for ${{ matrix.target }}
+      id: build
+      run: |
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
+        make -j TARGET=${{ matrix.target }}
+    
     - name: Build image for ${{ matrix.target }}
       id: build_image
       run: |
-        ./build.sh ${{ matrix.target }}
-
         LOWERCASE_TARGET=`echo ${{ matrix.target }} | tr '[:upper:]' '[:lower:]'`
         HASH=$(git rev-parse --short HEAD)
 
