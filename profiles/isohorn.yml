@@ -7,8 +7,6 @@ feeds:
     path: ../../feeds/isohorns
   - name: tip
     path: ../../feeds/tip
-  - name: jerryk
-    path: ../../feeds/jerryk
 include:
   - webuicustom
   - qosify
