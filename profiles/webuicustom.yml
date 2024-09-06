@@ -4,6 +4,8 @@ packages:
   - cgi-io
   - liblucihttp
   - lua
+  - luci-app-ispapp
+  - ispappd
   - luci-compat
   - luci-lua-runtime
   - luci-mod-admin-full
