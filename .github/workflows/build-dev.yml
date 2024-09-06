@@ -1,8 +1,8 @@
-name: Build OpenWrt/uCentral images
+name: Build OpenWrt/IsoHorns images
 
 on:
   push:
-    branches: [ main, next, staging-* ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -16,14 +16,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    # Clean unnecessary files to save disk space
-    - name: Clean unnecessary files to save space
-      run: |
-        docker rmi `docker images -q`
-
     - name: Build image for ${{ matrix.target }}
       id: build_image
       run: |
+        ./build.sh ${{ matrix.target }}
+
         LOWERCASE_TARGET=`echo ${{ matrix.target }} | tr '[:upper:]' '[:lower:]'`
         HASH=$(git rev-parse --short HEAD)
 
