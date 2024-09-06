@@ -3,10 +3,8 @@ description: Add the isohorns dependencies
 feeds:
   - name: ucentral
     path: ../../feeds/ucentral
-  - name: ispapp_luci
-    path: ../../feeds/ispapp_luci
-  - name: ispapp_pkgs
-    path: ../../feeds/ispapp_pkgs
+  - name: isohorns
+    path: ../../feeds/isohorns
   - name: tip
     path: ../../feeds/tip
   - name: jerryk
