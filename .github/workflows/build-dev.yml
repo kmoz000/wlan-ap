@@ -35,18 +35,21 @@ jobs:
 
         BASENAME="$(date +%Y%m%d)-$LOWERCASE_TARGET-main-$HASH"
         TAR_NAME="$BASENAME.tar.gz"
-        IMG_NAME="$BASENAME-upgrade.bin"
-        JSON_NAME="$BASENAME.json"
 
         echo "IMG_NAME=$IMG_NAME" >> $GITHUB_ENV  # Export IMG_NAME as an environment variable
 
         # Package the files
-        tar cfz "$TAR_NAME" -C openwrt/bin/targets/ .
+        tar cfz "openwrt/tmp/$TAR_NAME" -C openwrt/bin/targets/ .
 
-        echo "::set-output name=img_name::$IMG_NAME"  # Set output for use in next steps
+        echo "::set-output name=TAR_NAME::$TAR_NAME"  # Set output for use in next steps
 
     - name: Create Release.txt for reference
       run: echo ${{ github.sha }} > Release.txt
+
+    - name: List all .ipk and .bin files in openwrt/bin/
+      run: |
+        echo "Listing all .ipk and .bin files in openwrt/bin/:"
+        find openwrt/bin/ -type f \( -name "*.ipk" -o -name "*.bin" \)
 
     - name: Push to the latest release
       uses: softprops/action-gh-release@v2
@@ -56,7 +59,6 @@ jobs:
         make_latest: true
         files: |
           Release.txt
-          openwrt/tmp/${{ steps.build_image.outputs.img_name }}
-          latest-upgrade.json
+          openwrt/tmp/${{ steps.build_image.outputs.TAR_NAME }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
