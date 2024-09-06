@@ -12,4 +12,4 @@ include:
 packages:
   - ipq53xx
 diffconfig: |
-  CONFIG_KERNEL_IPQ_MEM_PROFILE=1024
+  CONFIG_KERNEL_IPQ_MEM_PROFILE=0

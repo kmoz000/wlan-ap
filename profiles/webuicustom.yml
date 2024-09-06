@@ -4,14 +4,13 @@ packages:
   - cgi-io
   - liblucihttp
   - lua
-  - luci-app-ispapp
-  - ispappd
   - luci-compat
   - luci-lua-runtime
   - luci-mod-admin-full
   - luci-lib-ipkg
   - luci-theme-argon
   - luci-theme-argon-config
+  - luci-app-ispapp
   - rpcd
   - rpcd-mod-file
   - rpcd-mod-iwinfo
