@@ -15,7 +15,7 @@ TARGET_DEVICES += cig_wf189
 define Device/wallys_dr5332
   DEVICE_TITLE := wallys DR5332
   DEVICE_DTS := ipq5332-wallys-dr5332
-  DEVICE_DTS_CONFIG := config@mi01.2-qcn9160-c1
+  DEVICE_DTS_CONFIG := config@mi01.2-qcn9274-c1
   IMAGES := sysupgrade.tar nand-factory.bin nand-factory.ubi
   IMAGE/sysupgrade.tar := sysupgrade-tar | append-metadata
   IMAGE/nand-factory.bin := append-ubi | qsdk-ipq-factory-nand

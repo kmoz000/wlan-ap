@@ -12,16 +12,16 @@
  #ifdef __IPQ_MEM_PROFILE_512_MB__
  #include "ipq5332-512MB-memory.dtsi"
  #else
- #include "ipq5332-default-memory.dtsi"
+ #include "ipq5332.dtsi"
  #endif
  
- #include "ipq5332-sercomm-mi01.2.dtsi"
- 
+#include "ipq5332-sercomm-mi01.2.dtsi"
+
  / {
 	 #address-cells = <0x2>;
 	 #size-cells = <0x2>;
 	 model = "Wallys WiFi-7";
-	 compatible = "wallys,dr5332", "sercomm,ap72tip", "qcom,ipq5332";
+	 compatible = "wallys,dr5332", "qcom,ipq5332", "qcom,ipq5332-ap-mi01.12", "qcom,ipq5332-ap-mi01.2", "sercomm,ap72tip";
 	 interrupt-parent = <&intc>;
  
 	 aliases {
@@ -49,7 +49,7 @@
 					 qrtr_node_id = <0x30>;
 					 memory-region = <0>, <&mhi_region0>;
  #else
-					 memory-region = <&qcn9224_pcie0>;
+					 memory-region = <&qcn9274_pcie0>;
 					 qcom,board_id = <0x15>;
 					 qcom,wsi = <&wsi>;
  #endif
@@ -124,11 +124,11 @@
 	 status = "ok";
  };
  
- &qcn9224_pcie0 {
+ &qcn9274_pcie0 {
 	 status = "disabled";
  };
  
- &qcn9224_pcie1 {
+ &qcn9274_pcie1 {
 	 status = "ok";
  };
  
@@ -141,15 +141,15 @@
  };
  
  &wifi1 {
-	 /* QCN9224 radio 5G */
-	 hremote_node = <&qcn9224_pcie0>;
+	 /* QCN9274 radio 5G */
+	 hremote_node = <&qcn9274_pcie0>;
 	 board_id = <0x15>;
 	 status = "disabled";
  };
  
  &wifi2 {
-	 /* QCN9224 5G+6G */
-	 hremote_node = <&qcn9224_pcie1>;
+	 /* QCN9274 5G+6G */
+	 hremote_node = <&qcn9274_pcie1>;
 	 qcom,board_id = <0x100f>; //0x16->0x1019
 	 status = "ok";
  };
