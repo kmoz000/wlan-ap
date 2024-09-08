@@ -1,7 +1,7 @@
 ---
 profile: wallys_dr5332
 target: ipq53xx
-subtarget: generic
+subtarget: ipq53xx_32
 description: Build image for the Wallys DR5332
 image: bin/targets/ipq53xx/generic/openwrt-ipq53xx-wallys_dr5332-squashfs-sysupgrade.tar
 feeds:

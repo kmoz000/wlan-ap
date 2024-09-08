@@ -20,8 +20,8 @@
 / {
 	#address-cells = <0x2>;
 	#size-cells = <0x2>;
-	model = "Wallys WiFi-7";
-	compatible = "wallys,dr5332", "qcom,ipq5332", "qcom,ipq5332-ap-mi01.12", "qcom,ipq5332-ap-mi01.2", "sercomm,ap72tip";
+	model = "Wallys DR5332";
+	compatible = "qcom,ipq5332-ap-mi01.12", "qcom,ipq5332", "qcom,ipq5332-ap-mi01.2", "sercomm,ap72tip";
 	interrupt-parent = <&intc>;
 
 	aliases {
