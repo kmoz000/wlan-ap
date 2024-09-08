@@ -7,7 +7,7 @@
  */
 
 
-#include "ipq5332-sercomm.dtsi"
+#include "ipq5332.dtsi"
 
 / {
 	aliases {
@@ -45,7 +45,7 @@
 				bias-pull-up;
 			};*/
 
-			i2c_0_pins: i2c-0-pinmux {
+			i2c_2_pins: i2c-2-pinmux {
 				pins = "gpio43", "gpio45";
 				function = "blsp2_i2c0";
 				drive-strength = <8>;
@@ -140,7 +140,6 @@
 		};
 
 
-#if 1	//AQR114C
 		dp1 {
 			device_type = "network";
 			compatible = "qcom,nss-dp";
@@ -152,7 +151,8 @@
 			qcom,phy-mdio-addr = <24>;
 			qcom,link-poll = <1>;
 			phy-mode = "sgmii";
-		};	
+		};
+		
 		dp2 {
 			device_type = "network";
 			compatible = "qcom,nss-dp";
@@ -165,60 +165,7 @@
 			phy-mode = "sgmii";
 		};
 
-		mdio:mdio@90000 { 
-			status = "ok";
-			pinctrl-0 = <&mdio1_pins>;
-			pinctrl-names = "default";
-			/*gpio0 for napa, gpio3 for AQR114C*/
-			//phy-reset-gpio = <&tlmm 0 0 &tlmm 3 0>;
-			phy-reset-gpio = <&tlmm 0 0>;
-
-			phy0: ethernet-phy@0 {
-				reg = <24>;
-			};
-			phy1: ethernet-phy@1 { //aqr114c
-				reg = <0>;
-				compatible ="ethernet-phy-ieee802.3-c45";
-			};
-		};
-
-		ess-instance {
-			ess-switch@3a000000 {
-				switch_cpu_bmp = <0x1>;  /* cpu port bitmap */
-				switch_lan_bmp = <0x0>; /* lan port bitmap */
-				switch_wan_bmp = <0x6>; /* wan port bitmap */
-				switch_mac_mode = <0xc>; /* mac mode for uniphy instance0*/
-				switch_mac_mode1 = <0xf>; /* mac mode for uniphy instance1  114c*/
-				switch_mac_mode2 = <0xff>; /* mac mode for uniphy instance2*/
-				qcom,port_phyinfo {
-					port@0 {
-						port_id = <1>;
-						phy_address = <24>;
-					};
-					port@1 { //aqr114c
-						port_id = <2>;
-						phy_address = <0>;
-						ethernet-phy-ieee802.3-c45;
-					};
-				};
-			};
-		};
-		
-#else	 //SFP
-		
-		dp1 {
-			device_type = "network";
-			compatible = "qcom,nss-dp";
-			qcom,id = <1>;
-			reg = <0x3a500000 0x4000>;
-			qcom,mactype = <1>;
-			local-mac-address = [000000000000];
-			mdio-bus = <&mdio>;
-			qcom,phy-mdio-addr = <24>;
-			qcom,link-poll = <1>;
-			phy-mode = "sgmii";
-		};
-		dp2 {
+/*		dp2 {
 			device_type = "network";
 			compatible = "qcom,nss-dp";
 			qcom,id = <2>;
@@ -230,50 +177,54 @@
 			qcom,link-poll = <1>;
 			phy-mode = "sgmii";
 		};
+*/
 
 		mdio:mdio@90000 { 
 			status = "ok";
 			pinctrl-0 = <&mdio1_pins>;
 			pinctrl-names = "default";
 			/*gpio0 for napa, gpio3 for AQR114C*/
-			//phy-reset-gpio = <&tlmm 0 0 &tlmm 3 0>;
-			phy-reset-gpio = <&tlmm 0 0>;
+			phy-reset-gpio = <&tlmm 0 0 &tlmm 3 0>;
 
 			phy0: ethernet-phy@0 {
 				reg = <24>;
 			};
+			phy1: ethernet-phy@1 { //aqr114c
+				reg = <0>;
+				compatible ="ethernet-phy-ieee802.3-c45";
+			};
+
 		};
 
 		ess-instance {
 			ess-switch@3a000000 {
+				pinctrl-names = "default";
 				switch_cpu_bmp = <0x1>;  /* cpu port bitmap */
 				switch_lan_bmp = <0x0>; /* lan port bitmap */
 				switch_wan_bmp = <0x6>; /* wan port bitmap */
-				switch_mac_mode = <0xc>; /* mac mode for uniphy instance0*/
-				switch_mac_mode1 = <0xe>; /* mac mode for uniphy instance1  sfp PORT_WRAPPER_10GBASE_R*/
-//				switch_mac_mode1 = <0xc>; /* mac mode for uniphy instance1  sfp PORT_WRAPPER_SGMII_PLUS*/
+				switch_mac_mode = <0xf>; /* mac mode for uniphy instance0*/
+				switch_mac_mode1 = <0xf>; /* mac mode for uniphy instance1*/
+//				switch_mac_mode1 = <0xe>; /* mac mode for uniphy instance1*/
 				switch_mac_mode2 = <0xff>; /* mac mode for uniphy instance2*/
 				qcom,port_phyinfo {
 					port@0 {
 						port_id = <1>;
 						phy_address = <24>;
 					};
-					port@1 {
+					port@1 { //aqr114c
+						port_id = <2>;
+						phy_address = <0>;
+						ethernet-phy-ieee802.3-c45;
+					};
+/*					port@1 {
 						port_id = <2>;
 						phy_address = <30>;
 						media-type = "sfp"; 
-					};
+					};*/
+
 				};
 			};
 		};
-#endif
-		
-		nss-macsec0 {
-			compatible = "qcom,nss-macsec";
-			phy_addr = <24>;
-			mdiobus = <&mdio>;
-		};
-		
 
 		eud@78000 {
 			status = "disabled";
@@ -348,9 +299,9 @@
 			status = "ok";
 		};
 		
-		i2c_0: i2c@78b7000 {
+		i2c_2: i2c@78b7000 {
 			status = "ok";
-			pinctrl-0 = <&i2c_0_pins>;
+			pinctrl-0 = <&i2c_2_pins>;
 			pinctrl-names = "default";
 		};
 
@@ -417,7 +368,7 @@
 
 		wsi: wsi {
 			id = <0>;
-			num_chip = <2>;
+			num_chip = <3>;
 		};
 
 		pcie@18000000 {
@@ -434,7 +385,7 @@
 					memory-region = <0>, <&mhi_region1>;
 #else
 					memory-region = <&qcn9224_pcie1>;
-					qcom,board_id = <0x100f>;
+					qcom,board_id = <0x16>;
 					qcom,wsi = <&wsi>;
 #endif
 				};

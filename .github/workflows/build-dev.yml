@@ -48,15 +48,10 @@ jobs:
     - name: Create Release.txt for reference
       run: echo ${{ github.sha }} > Release.txt
 
-    - name: List all .ipk and .bin files in openwrt/bin/
+    - name: List all .ipk and .bin files in ./
       run: |
         echo "Listing all .ipk and .bin files in openwrt/bin/:"
-        find openwrt/bin/ -type f \( -name "*.ipk" -o -name "*.bin" \)
-    
-    - name: List all .ipk and .bin files in openwrt/tmp/
-      run: |
-        echo "Listing all .ipk and .bin files in openwrt/tmp/:"
-        find openwrt/tmp/ -type f \( -name "*.ipk" -o -name "*.bin" \)
+        find . -type f \( -name "*.ipk" -o -name "*.bin" \)
 
     - name: Push to the latest release
       uses: softprops/action-gh-release@v2
