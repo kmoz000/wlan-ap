@@ -1,0 +1,15 @@
+---
+profile: qcom_ipq5332-ap-mi01.12
+target: ipq53xx
+subtarget: ipq53xx_32
+description: Build image for the Wallys DR5332
+image: bin/targets/ipq53xx/ipq53xx_32/openwrt-ipq53xx-qcom_ipq5332-ap-mi01.12-squashfs-sysupgrade.bin
+feeds:
+  - name: ipq95xx
+    path: ../../feeds/ipq95xx
+include:
+  - isohorn
+packages:
+  - ipq53xx
+diffconfig: |
+  CONFIG_KERNEL_IPQ_MEM_PROFILE=0
