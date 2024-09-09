@@ -1,9 +1,9 @@
 ---
-profile: wallys_dr5332
+profile: qcom_ipq5332-ap-mi01.12
 target: ipq53xx
-subtarget: generic
+subtarget: ipq53xx_32
 description: Build image for the Wallys DR5332
-image: bin/targets/ipq53xx/generic/openwrt-ipq53xx-wallys_dr5332-squashfs-sysupgrade.tar
+image: bin/targets/ipq53xx/ipq53xx_32/openwrt-ipq53xx-qcom_ipq5332-ap-mi01.12-squashfs-sysupgrade.tar
 feeds:
   - name: ipq95xx
     path: ../../feeds/ipq95xx
