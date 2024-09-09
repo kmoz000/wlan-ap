@@ -16,10 +16,11 @@ define Device/wallys_dr5332
   DEVICE_TITLE := wallys DR5332
   DEVICE_DTS := ipq5332-wallys-dr5332
   DEVICE_DTS_CONFIG := config@mi01.2-qcn9160-c1
-  IMAGES := sysupgrade.tar nand-factory.bin nand-factory.ubi
+  IMAGES := sysupgrade.bin sysupgrade.tar nand-factory.bin nand-factory.ubi
   IMAGE/sysupgrade.tar := sysupgrade-tar | append-metadata
   IMAGE/nand-factory.bin := append-ubi | qsdk-ipq-factory-nand
   IMAGE/nand-factory.ubi := append-ubi
+  IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata
   DEVICE_PACKAGES := ath12k-wifi-qcom-qcn9274 ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
 endef
 TARGET_DEVICES += wallys_dr5332
