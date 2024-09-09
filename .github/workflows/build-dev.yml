@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [ 'wallys_dr5332', 'qcom_ipq5332', 'qcom_ipq5332_bin']
+        target: [ 'wallys_dr5332' ]
 
     steps:
     - name: Checkout
