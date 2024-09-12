@@ -24,12 +24,12 @@ jobs:
           sudo apt install linux-headers-$(uname -r)
           ls -l /usr/src/linux-headers-$(uname -r)
           mkdir -p ~/.bin
-          PATH="${HOME}/.bin:${PATH}"
           curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
           chmod a+rx ~/.bin/repo
 
       - name: Initialize QSDK repo
         run: |
+          export PATH="${HOME}/.bin:${PATH}"
           repo init -u https://git.codelinaro.org/clo/qsdk/releases/manifest/qstak \
           -b release \
           -m AU_LINUX_QSDK_NHSS.QSDK.12.5_TARGET_ALL.12.5.2783.2930.xml \
