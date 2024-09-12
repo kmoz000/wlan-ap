@@ -56,7 +56,7 @@ jobs:
               exit 1  # Fail the workflow if the retry fails
             fi
           fi
-      
+          repo sync
       # Set up the build environment
       - name: Set up build environment for IPQ5332
         run: |
