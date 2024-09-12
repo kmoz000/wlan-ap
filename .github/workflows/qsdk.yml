@@ -30,11 +30,33 @@ jobs:
       - name: Initialize QSDK repo
         run: |
           export PATH="${HOME}/.bin:${PATH}"
+          set +e  # Disable exit on error to allow the script to continue on failure
           repo init -u https://git.codelinaro.org/clo/qsdk/releases/manifest/qstak \
-          -b release \
-          -m AU_LINUX_QSDK_NHSS.QSDK.12.5_TARGET_ALL.12.5.2783.2930.xml \
-          --repo-url=https://git.codelinaro.org/clo/tools/repo \
-          --repo-branch=qc-stable
+            -b release \
+            -m AU_LINUX_QSDK_NHSS.QSDK.12.5_TARGET_ALL.12.5.2783.2930.xml \
+            --repo-url=https://git.codelinaro.org/clo/tools/repo \
+            --repo-branch=qc-stable
+          INIT_EXIT_CODE=$?
+          set -e  # Re-enable exit on error
+      
+          if [ $INIT_EXIT_CODE -ne 0 ]; then
+            echo "repo init failed. Applying patch to help.py"
+            cp .github/workflows/patches/help.py /home/runner/work/wlan-ap/wlan-ap/.repo/repo/subcmds/help.py
+      
+            # Retry the repo init after patching
+            echo "Retrying repo init after patching..."
+            repo init -u https://git.codelinaro.org/clo/qsdk/releases/manifest/qstak \
+              -b release \
+              -m AU_LINUX_QSDK_NHSS.QSDK.12.5_TARGET_ALL.12.5.2783.2930.xml \
+              --repo-url=https://git.codelinaro.org/clo/tools/repo \
+              --repo-branch=qc-stable
+      
+            if [ $? -ne 0 ]; then
+              echo "repo init failed again after patching"
+              exit 1  # Fail the workflow if the retry fails
+            fi
+          fi
+      
       # Set up the build environment
       - name: Set up build environment for IPQ5332
         run: |
