@@ -2,11 +2,8 @@ name: Build IPQ5332 Firmware
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    paths:
+      - .github/workflows/qsdk.yml
 
 jobs:
   build:
@@ -21,7 +18,7 @@ jobs:
       - name: Set up dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential git libncurses5-dev libssl-dev \
+          sudo apt-get install -y repo build-essential git libncurses5-dev libssl-dev \
                                   python3-dev gawk gcc-multilib flex gettext \
                                   zlib1g-dev file wget
           sudo apt install linux-headers-$(uname -r)

@@ -3,7 +3,11 @@ name: Build OpenWrt/IsoHorns images
 on:
   push:
     branches: [ main ]
-
+    paths:
+      - feeds
+      - profiles
+      - docker
+      - patches
 jobs:
   build:
     runs-on: ubuntu-20.04
