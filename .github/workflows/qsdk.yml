@@ -34,7 +34,7 @@ jobs:
           -b release \
           -m AU_LINUX_QSDK_NHSS.QSDK.12.5_TARGET_ALL.12.5.2783.2930.xml \
           --repo-url=https://git.codelinaro.org/clo/tools/repo \
-          --repo-branch=v2.32
+          --repo-branch=qc-stable
       # Set up the build environment
       - name: Set up build environment for IPQ5332
         run: |
