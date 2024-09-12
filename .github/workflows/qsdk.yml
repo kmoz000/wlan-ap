@@ -33,7 +33,7 @@ jobs:
           set +e  # Disable exit on error to allow the script to continue on failure
           repo init -u https://git.codelinaro.org/clo/qsdk/releases/manifest/qstak \
             -b release \
-            -m AU_LINUX_QSDK_NHSS.QSDK.12.5_TARGET_ALL.12.5.2783.2930.xml \
+            -m AU_LINUX_QSDK_NHSS.QSDK.12.4.5.R2_TARGET_ALL.12.4.502.099.019.xml \
             --repo-url=https://git.codelinaro.org/clo/tools/repo \
             --repo-branch=qc-stable
           INIT_EXIT_CODE=$?
@@ -47,7 +47,7 @@ jobs:
             echo "Retrying repo init after patching..."
             repo init -u https://git.codelinaro.org/clo/qsdk/releases/manifest/qstak \
               -b release \
-              -m AU_LINUX_QSDK_NHSS.QSDK.12.5_TARGET_ALL.12.5.2783.2930.xml \
+              -m AU_LINUX_QSDK_NHSS.QSDK.12.4.5.R2_TARGET_ALL.12.4.502.099.019.xml \
               --repo-url=https://git.codelinaro.org/clo/tools/repo \
               --repo-branch=qc-stable
       
