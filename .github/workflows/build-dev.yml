@@ -32,11 +32,6 @@ jobs:
       # Echo the `uname` output parameter from the `runcmd` step
       run: |
         echo "The uname output was ${{ steps.runcmd.outputs.uname }}"  
-     # Clean unnecessary files to save disk space
-    - name: clean unncessary files to save space
-      run: |
-        docker rmi `docker images -q`
-
     - name: Build image for ${{ matrix.target }}
       id: build
       run: |
