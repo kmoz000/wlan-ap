@@ -8,7 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    container:
+      image: i386/ubuntu:latest
     steps:
       # Checkout the repository
       - name: Checkout code

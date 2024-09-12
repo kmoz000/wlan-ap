@@ -10,7 +10,9 @@ on:
       - patches
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    container:
+      image: i386/ubuntu:latest
     strategy:
       fail-fast: false
       matrix:
