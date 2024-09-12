@@ -2,12 +2,8 @@ name: Build OpenWrt/IsoHorns images
 
 on:
   push:
-    branches: [ main ]
     paths:
-      - feeds
-      - profiles
-      - docker
-      - patches
+      - .github/workflows/build-dev.yml
 jobs:
   build:
     runs-on: ubuntu-22.04
