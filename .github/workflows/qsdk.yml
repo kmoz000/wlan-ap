@@ -1,0 +1,83 @@
+name: Build IPQ5332 Firmware
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up dependencies
+      - name: Set up dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential git libncurses5-dev libssl-dev \
+                                  python3-dev gawk gcc-multilib flex gettext \
+                                  zlib1g-dev file wget
+          sudo apt install linux-headers-$(uname -r)
+          ls -l /usr/src/linux-headers-$(uname -r)
+      - name: Initialize QSDK repo
+        run: |
+          repo init -u https://git.codelinaro.org/clo/qsdk/releases/manifest/qstak \
+          -b release \
+          -m AU_LINUX_QSDK_NHSS.QSDK.12.5_TARGET_ALL.12.5.2783.2930.xml \
+          --repo-url=https://git.codelinaro.org/clo/tools/repo \
+          --repo-branch=main
+      # Set up the build environment
+      - name: Set up build environment for IPQ5332
+        run: |
+          cp .github/workflows/.config.ipq5332 qsdk/.config
+      - name: Build IPQ5332 32-bit firmware
+        run: |
+          cd qsdk
+          make package/symlinks
+          make download -j$(nproc)
+          make -j$(nproc) V=s
+      
+      - name: List all .ipk and .bin files in ./
+        run: |
+          echo "Listing all .ipk and .bin files in openwrt/bin/:"
+          find . -type f \( -name "*.ipk" -o -name "*.bin" \)
+      
+      - name: Build image for ipq5332
+        id: build_image
+        run: |
+          LOWERCASE_TARGET=`echo ipq5332 | tr '[:upper:]' '[:lower:]'`
+          HASH=$(git rev-parse --short HEAD)
+  
+          BASENAME="$(date +%Y%m%d)-ipq5332-qsdk-$HASH"
+          TAR_NAME="$BASENAME.tar.gz"
+          IMG_NAME="$BASENAME-upgrade.bin"
+  
+          echo "IMG_NAME=$IMG_NAME" >> $GITHUB_ENV  # Export IMG_NAME as an environment variable
+          echo "::set-output name=IMG_NAME::$IMG_NAME"  # Set output for use in next steps
+  
+          # Package the files
+          tar cfz "qsdk/tmp/$TAR_NAME" -C qsdk/bin/targets/ .
+  
+          echo "::set-output name=TAR_NAME::$TAR_NAME"  # Set output for use in next steps
+      
+      - name: Create Release.txt for reference
+        run: echo ${{ github.sha }} > Release.txt
+      
+      - name: Push to the latest release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: qsdk
+          name: qsdk
+          make_latest: true
+          files: |
+            Release.txt
+            openwrt/tmp/${{ steps.build_image.outputs.TAR_NAME }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
