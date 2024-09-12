@@ -18,11 +18,16 @@ jobs:
       - name: Set up dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y repo build-essential git libncurses5-dev libssl-dev \
+          sudo apt-get install -y build-essential git libncurses5-dev libssl-dev \
                                   python3-dev gawk gcc-multilib flex gettext \
                                   zlib1g-dev file wget
           sudo apt install linux-headers-$(uname -r)
           ls -l /usr/src/linux-headers-$(uname -r)
+          mkdir -p ~/.bin
+          PATH="${HOME}/.bin:${PATH}"
+          curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
+          chmod a+rx ~/.bin/repo
+
       - name: Initialize QSDK repo
         run: |
           repo init -u https://git.codelinaro.org/clo/qsdk/releases/manifest/qstak \
