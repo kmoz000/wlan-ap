@@ -36,8 +36,6 @@ jobs:
       # Echo the `uname` output parameter from the `runcmd` step
       run: |
         echo "The uname output was ${{ steps.runcmd.outputs.uname }}"  
-    - name: Checkout
-      uses: actions/checkout@v4
      # Clean unnecessary files to save disk space
     - name: clean unncessary files to save space
       run: |
