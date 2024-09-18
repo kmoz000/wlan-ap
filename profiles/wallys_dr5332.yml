@@ -8,7 +8,8 @@ feeds:
   - name: ipq95xx
     path: ../../feeds/ipq95xx
 include:
-  - isohorn
+  - ucentral-ap
+  - wifi-ax-v54
 packages:
   - ipq53xx
 diffconfig: |
