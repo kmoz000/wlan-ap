@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [ 'qcom_ipq5332' ]
+        target: [ 'wallys_dr5332' ]
 
     steps:
     - uses: actions/checkout@v4
