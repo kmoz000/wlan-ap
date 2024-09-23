@@ -8,8 +8,8 @@ on:
       - profiles/*
 jobs:
   build:
-    runs-on: ubuntu-22.04
-    name: Build on ubuntu-22.04 armv7
+    runs-on: ubuntu-latest
+    name: Build on ubuntu
     strategy:
       fail-fast: false
       matrix:
@@ -17,23 +17,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: uraimo/run-on-arch-action@v2
-      name: Run commands
-      id: runcmd
-      with:
-        arch: armv7
-        distro: ubuntu22.04
-        # Not required, but speeds up builds by storing container images in
-        # a GitHub package registry.
-        githubToken: ${{ github.token }}
-        # Set an output parameter `uname` for use in subsequent steps
-        run: |
-          uname -a
-          echo ::set-output name=uname::$(uname -a)
-    - name: Get the output
-      # Echo the `uname` output parameter from the `runcmd` step
-      run: |
-        echo "The uname output was ${{ steps.runcmd.outputs.uname }}"
+    # - uses: uraimo/run-on-arch-action@v2
+    #   name: Run commands
+    #   id: runcmd
+    #   with:
+    #     arch: armv7
+    #     distro: ubuntu22.04
+    #     # Not required, but speeds up builds by storing container images in
+    #     # a GitHub package registry.
+    #     githubToken: ${{ github.token }}
+    #     # Set an output parameter `uname` for use in subsequent steps
+    #     run: |
+    #       uname -a
+    #       echo ::set-output name=uname::$(uname -a)
+    # - name: Get the output
+    #   # Echo the `uname` output parameter from the `runcmd` step
+    #   run: |
+    #     echo "The uname output was ${{ steps.runcmd.outputs.uname }}"
       
     - name: Build image for ${{ matrix.target }}
       id: build
@@ -42,7 +42,7 @@ jobs:
         git config --global user.name "Your Name"
         make -j TARGET=${{ matrix.target }}
     
-    - name: Build image for ${{ matrix.target }}
+    - name: Pack image for ${{ matrix.target }}
       id: build_image
       run: |
         LOWERCASE_TARGET=`echo ${{ matrix.target }} | tr '[:upper:]' '[:lower:]'`

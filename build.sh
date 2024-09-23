@@ -23,6 +23,5 @@ cd ${BUILD_DIR}
 cd -
 
 echo "### Building image ..."
-make defconfig
 cd $BUILD_DIR
 make -j$(nproc) V=s
