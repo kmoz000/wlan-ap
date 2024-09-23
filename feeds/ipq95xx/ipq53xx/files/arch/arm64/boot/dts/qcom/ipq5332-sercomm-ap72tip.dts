@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
 /*
- * IPQ5332 AP-MI01.2 board device tree source
- *
- * Copyright (c) 2020-2021 The Linux Foundation. All rights reserved.
- * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
- */
+* IPQ5332 AP-MI01.2 board device tree source
+*
+* Copyright (c) 2020-2021 The Linux Foundation. All rights reserved.
+* Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+*/
 
 /dts-v1/;
 
@@ -23,20 +23,20 @@
 	model = "Sercomm WiFi-7";
 	compatible = "sercomm,ap72tip", "qcom,ipq5332";
 	interrupt-parent = <&intc>;
-
+	
 	aliases {
 		led-boot = &led_power;
 		led-failsafe = &led_power;
 		led-running = &led_power;
 		led-upgrade = &led_power;
 	};
-
+	
 	soc {
 		phy@4b0000 {
 			status = "disabled";
 		};
-
-
+		
+		
 		pcie@20000000 {
 			status = "disabled";
 			pcie0_rp {
@@ -56,7 +56,7 @@
 				};
 			};
 		};
-
+		
 		pinctrl@1000000 {
 			button_pins: button_pins {
 				rst_button {
@@ -67,7 +67,7 @@
 				};
 			};
 		};
-
+		
 		gpio_keys {
 			compatible = "gpio-keys";
 			pinctrl-0 = <&button_pins>;
@@ -80,10 +80,10 @@
 				debounce-interval = <60>;
 			};
 		};
-
+		
 		leds {
 			compatible = "gpio-leds";
-
+			
 			led@25 {
 				label = "blue:status";
 				gpios = <&tca6416 9 GPIO_ACTIVE_HIGH>;
@@ -120,7 +120,7 @@
 	memory-region = <&q6_region>;
 	qcom,wsi = <&wsi>;
 #endif
-	qcom,board_id = <0x16>; //orig:0x12->0x16
+	qcom,board_id = <0x16>;//orig:0x12->0x16
 	status = "ok";
 };
 
@@ -150,7 +150,7 @@
 &wifi2 {
 	/* QCN9224 5G+6G */
 	hremote_node = <&qcn9224_pcie1>;
-	qcom,board_id = <0x100f>; //0x16->0x1019
+	qcom,board_id = <0x100f>;//0x16->0x1019
 	status = "ok";
 };
 
