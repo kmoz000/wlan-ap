@@ -4,8 +4,8 @@ on:
   push:
     paths:
       - .github/workflows/build-dev.yml
-      - feeds/*
-      - profiles/*
+      - feeds/**/*
+      - profiles/**/*
 jobs:
   build:
     runs-on: ubuntu-latest
