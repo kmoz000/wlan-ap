@@ -1,0 +1,25 @@
+From 5c6a8b1d84e62c4a113b4a6076a97b3be8b3e8a4 Mon Sep 17 00:00:00 2001
+From: Your Name <your.email@example.com>
+Date: Thu, 26 Sep 2024 12:00:00 +0200
+Subject: [PATCH] kconfig: remove syncconfig from kernel config targets
+
+Signed-off-by: Your Name <your.email@example.com>
+---
+ include/kernel-5.4/scripts/kconfig/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/kernel-5.4/scripts/kconfig/Makefile b/include/kernel-5.4/scripts/kconfig/Makefile
+index abc1234..def5678 100644
+--- a/include/kernel-5.4/scripts/kconfig/Makefile
++++ b/include/kernel-5.4/scripts/kconfig/Makefile
+@@ -68,7 +68,7 @@ simple-targets := oldconfig allnoconfig allyesconfig allmodconfig \
+        alldefconfig randconfig listnewconfig olddefconfig syncconfig
+
+ # Note:
+-#  syncconfig has become an internal implementation detail and is now
++#  syncconfig has become deprecated for external use
+ simple-targets := oldconfig allnoconfig allyesconfig allmodconfig \
+-       alldefconfig randconfig listnewconfig olddefconfig syncconfig
++       alldefconfig randconfig listnewconfig olddefconfig
+-- 
+2.34.1
