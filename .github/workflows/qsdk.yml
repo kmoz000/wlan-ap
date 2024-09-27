@@ -15,7 +15,7 @@ jobs:
         run: |
           export DEBIAN_FRONTEND="noninteractive"
           sudo apt-get update -y
-          sudo apt-get install -y  apt-get -y install net-tools iputils-ping wget rsync unzip \
+          sudo apt-get -y install net-tools iputils-ping wget rsync unzip \
               unzip git figlet build-essential bison help2man ncurses-term gawk tree
           sudo apt-get -y install ocaml-findlib ocaml-base-nox ocaml-base libfindlib-ocaml-dev \
               autoconf automake ccache cgroupfs-mount gcc g++ binutils patch bzip2 flex \
