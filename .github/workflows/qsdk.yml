@@ -8,33 +8,23 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build on ubuntu-22.04 armv7
     steps:
       - uses: actions/checkout@v4
-      - uses: uraimo/run-on-arch-action@v2
-        name: Run commands
-        id: runcmd
-        with:
-          arch: armv7
-          distro: ubuntu22.04
-          # Not required, but speeds up builds by storing container images in
-          # a GitHub package registry.
-          githubToken: ${{ github.token }}
-          # Set an output parameter `uname` for use in subsequent steps
-          run: |
-            uname -a
-            echo ::set-output name=uname::$(uname -a)
-      - name: Get the output
-        # Echo the `uname` output parameter from the `runcmd` step
-        run: |
-          echo "The uname output was ${{ steps.runcmd.outputs.uname }}"
       # Set up dependencies
       - name: Set up dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential git libncurses5-dev libssl-dev \
-                                  python3-dev gawk gcc-multilib flex gettext \
-                                  zlib1g-dev file wget
+          export DEBIAN_FRONTEND="noninteractive"
+          sudo apt-get update -y
+          sudo apt-get install -y  apt-get -y install net-tools iputils-ping wget rsync unzip \
+              unzip git figlet build-essential bison help2man ncurses-term gawk tree
+          sudo apt-get -y install ocaml-findlib ocaml-base-nox ocaml-base libfindlib-ocaml-dev \
+              autoconf automake ccache cgroupfs-mount gcc g++ binutils patch bzip2 flex \
+              make gettext pkg-config unzip zlib1g-dev libc6-dev subversion libncurses5-dev \
+              gawk sharutils curl libxml-parser-perl python-yaml ocaml-nox ocaml libssl-dev \
+              libfdt-dev device-tree-compiler u-boot-tools parallel freetds-dev ocaml-native-compilers \
+              libpcre-ocaml libpcre-ocaml-dev libpycaml-ocaml-dev coccinelle
+          sudo apt-get -y install libssl1.0-dev
+          sudo apt-get -y install lib32gcc1
           sudo apt install linux-headers-$(uname -r)
           ls -l /usr/src/linux-headers-$(uname -r)
           mkdir -p ~/.bin
@@ -43,6 +33,7 @@ jobs:
 
       - name: Initialize QSDK repo
         run: |
+          export DEBIAN_FRONTEND="noninteractive"
           export PATH="${HOME}/.bin:${PATH}"
           set +e  # Disable exit on error to allow the script to continue on failure
           repo init -u https://git.codelinaro.org/clo/qsdk/releases/manifest/qstak \
@@ -86,7 +77,7 @@ jobs:
       
       - name: List all .ipk and .bin files in ./
         run: |
-          echo "Listing all .ipk and .bin files in openwrt/bin/:"
+          echo "Listing all .ipk and .bin files in qsk/bin/:"
           find . -type f \( -name "*.ipk" -o -name "*.bin" \)
       
       - name: Build image for ipq5332

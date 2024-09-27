@@ -2898,7 +2898,7 @@ CONFIG_PACKAGE_perf=m
 #
 # CONFIG_PACKAGE_ath12k-wifi-cig-wf189 is not set
 # CONFIG_PACKAGE_ath12k-wifi-edgecore-eap105 is not set
-# CONFIG_PACKAGE_ath12k-wifi-qcom-qcn9274 is not set
+CONFIG_PACKAGE_ath12k-wifi-qcom-qcn9274=y
 # CONFIG_PACKAGE_ath12k-wifi-sercomm-ap72tip is not set
 # CONFIG_PACKAGE_aircard-pcmcia-firmware is not set
 # CONFIG_PACKAGE_amdgpu-firmware is not set
@@ -2922,10 +2922,10 @@ CONFIG_PACKAGE_perf=m
 # CONFIG_PACKAGE_ath10k-firmware-qca99x0 is not set
 # CONFIG_PACKAGE_ath10k-firmware-qca99x0-ct is not set
 # CONFIG_PACKAGE_ath10k-firmware-qca99x0-ct-htt is not set
-# CONFIG_PACKAGE_ath12k-firmware-ipq53xx is not set
+CONFIG_PACKAGE_ath12k-firmware-ipq53xx=y
 # CONFIG_PACKAGE_ath12k-firmware-ipq53xx-wk-wk is not set
 # CONFIG_PACKAGE_ath12k-firmware-qcn92xx is not set
-# CONFIG_PACKAGE_ath12k-firmware-qcn92xx-split-phy is not set
+# CONFIG_PACKAGE_ath12k-firmware-qcn92xx-split-phy=y is not set
 # CONFIG_PACKAGE_ath6k-firmware is not set
 # CONFIG_PACKAGE_ath9k-htc-firmware is not set
 # CONFIG_PACKAGE_b43legacy-firmware is not set
