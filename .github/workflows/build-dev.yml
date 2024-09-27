@@ -6,6 +6,8 @@ on:
       - .github/workflows/build-dev.yml
       - feeds/**/*
       - profiles/**/*
+      - patches/**/*
+      - kpatches/**/*
 jobs:
   build:
     runs-on: ubuntu-latest
