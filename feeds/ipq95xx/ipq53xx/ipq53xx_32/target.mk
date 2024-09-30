@@ -2,7 +2,9 @@
 ARCH:=arm
 SUBTARGET:=ipq53xx_32
 BOARDNAME:=QTI IPQ53XX(32bit) based boards
+FEATURES:=squashfs fpu ramdisk nand
 CPU_TYPE:=cortex-a7
+CPU_SUBTYPE:=neon-vfpv4
 
 DEFAULT_PACKAGES += \
 	uboot-2016-ipq5332 uboot-2016-ipq5332_tiny fwupgrade-tools \

@@ -1,4 +1,4 @@
-KERNEL_LOADADDR := 0x40080000
+KERNEL_LOADADDR := 0x50000000
 
 define Device/FitImage
 	KERNEL_SUFFIX := -fit-uImage.itb
@@ -40,7 +40,7 @@ define Device/wallys_dr5332
   DEVICE_VENDOR := Wallys
 	DEVICE_MODEL := DR5332
   DEVICE_DTS := ipq5332-wallys-dr5332
-  DEVICE_DTS_CONFIG := config@mi01.2-qcn9160-c1
+  DEVICE_DTS_CONFIG := config@mi01.12
 	SOC := qcom-ipq5332
   DEVICE_PACKAGES := ath12k-wifi-qcom-qcn9274 ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
 endef
