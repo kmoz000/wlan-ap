@@ -72,13 +72,14 @@ jobs:
     - name: Push to the latest release
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: latest
+        tag_name: ${{ github.sha }}
         name: latest
         make_latest: true
         files: |
           Release.txt
           openwrt/tmp/${{ steps.build_image.outputs.TAR_NAME }}
           openwrt/tmp/${{ steps.build_image.outputs.IMG_NAME }}
-          openwrt/bin/targets/ipq5332/generic/packages/ath12*
+          openwrt/bin/targets/ipq5332/**/packages/ath12*
+          openwrt/bin/targets/ipq5332/**/*.img
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
