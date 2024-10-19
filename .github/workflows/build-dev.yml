@@ -81,5 +81,7 @@ jobs:
           openwrt/tmp/${{ steps.build_image.outputs.IMG_NAME }}
           openwrt/bin/targets/ipq5332/**/packages/ath12*
           openwrt/bin/targets/ipq5332/**/*.img
+          openwrt/bin/targets/ipq5332/**/*.tar.gz
+          openwrt/bin/targets/ipq5332/**/*-upgrade.bin
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

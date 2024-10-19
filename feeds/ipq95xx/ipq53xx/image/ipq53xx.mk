@@ -1,17 +1,14 @@
-KERNEL_LOADADDR := 0x50000000
+KERNEL_LOADADDR := 0x40080000
+
+DEVICE_VARS += NETGEAR_BOARD_ID NETGEAR_HW_ID
+DEVICE_VARS += RAS_BOARD RAS_ROOTFS_SIZE RAS_VERSION
+DEVICE_VARS += WRGG_DEVNAME WRGG_SIGNATURE
 
 define Device/FitImage
 	KERNEL_SUFFIX := -fit-uImage.itb
 	KERNEL = kernel-bin | gzip | fit gzip $$(DTS_DIR)/$$(DEVICE_DTS).dtb
 	KERNEL_NAME := Image
 endef
-
-define Device/FitImageLzma
-	KERNEL_SUFFIX := -fit-uImage.itb
-	KERNEL = kernel-bin | lzma | fit lzma $$(DTS_DIR)/$$(DEVICE_DTS).dtb
-	KERNEL_NAME := Image
-endef
-
 
 define Device/UbiFit
 	KERNEL_IN_UBI := 1
@@ -32,21 +29,6 @@ define Device/cig_wf189
 endef
 TARGET_DEVICES += cig_wf189
 
-define Device/wallys_dr5332
-  $(call Device/FitImage)
-	$(call Device/UbiFit)
-	BLOCKSIZE := 128k
-	PAGESIZE := 2048
-  DEVICE_VENDOR := Wallys
-	DEVICE_MODEL := DR5332
-  DEVICE_DTS := ipq5332-wallys-dr5332
-  DEVICE_DTS_CONFIG := config@mi01.12
-	SOC := qcom-ipq5332
-  DEVICE_PACKAGES := ath12k-wifi-qcom-qcn9274 ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
-endef
-TARGET_DEVICES += wallys_dr5332
-
-
 define Device/sercomm_ap72tip
   DEVICE_TITLE := Sercomm AP72 TIP
   DEVICE_DTS := ipq5332-sercomm-ap72tip
@@ -58,6 +40,20 @@ define Device/sercomm_ap72tip
   DEVICE_PACKAGES := ath12k-wifi-sercomm-ap72tip ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
 endef
 TARGET_DEVICES += sercomm_ap72tip
+
+define Device/wallys_dr5332
+  $(call Device/FitImage)
+  $(call Device/UbiFit)
+	BLOCKSIZE := 128k
+	PAGESIZE := 2048
+  DEVICE_VENDOR := Wallys
+	DEVICE_MODEL := DR5332
+  DEVICE_DTS := ipq5332-wallys-dr5332
+  DEVICE_DTS_CONFIG := config@mi01.12
+	SOC := qcom-ipq5332
+  DEVICE_PACKAGES := ath12k-wifi-qcom-qcn9274 ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
+endef
+TARGET_DEVICES += wallys_dr5332
 
 define Device/edgecore_eap105
   DEVICE_TITLE := Edgecore EAP105

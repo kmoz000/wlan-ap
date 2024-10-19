@@ -156,7 +156,9 @@ function netifd_reload() {
 				let vid = stacfg.vid;
 				if (vid)
 					keydata.vlan = +vid;
-
+				let mac = stacfg.mac;
+				if (mac)
+					keydata.mac = mac;
 				ssid.keys[key] = keydata;
 			}
 		}
@@ -201,12 +203,23 @@ function sta_cache_entry_add(ssid, addr, key) {
 	return cache_data;
 }
 
-function ssid_psk(ssid) {
+function ssid_psk(ssid, addr) {
 	ssid = ssids[ssid];
 	if (!ssid)
 		return [];
 
-	return keys(ssid.keys);
+	let specific = [];
+	let rest = [];
+	for (let k, v in ssid.keys)
+		if (v.mac == addr)
+			push(specific, k);
+		else if (!v.mac)
+			push(rest, k);
+
+	if (length(specific))
+		return specific;
+
+	return rest;
 }
 
 function sta_auth_psk(ifname, addr) {
@@ -218,10 +231,10 @@ function sta_auth_psk(ifname, addr) {
 	if (cache)
 		return [ cache.key ];
 
-	return ssid_psk(ssid);
+	return ssid_psk(ssid, addr);
 }
 
-function sta_auth_cache(ifname, addr, idx) {
+function sta_auth_cache(ifname, addr, idx, phrase) {
 	let ssid = iface_ssid(ifname);
 	if (!ssid)
 		return;
@@ -230,11 +243,14 @@ function sta_auth_cache(ifname, addr, idx) {
 	if (cache)
 		return cache.data;
 
-	let psk = ssid_psk(ssid);
+	let psk = ssid_psk(ssid, addr);
 	if (!psk)
 		return;
 
 	psk = psk[idx];
+	if (!psk)
+		psk = phrase;
+
 	if (!psk)
 		return;
 
@@ -284,7 +300,7 @@ function auth_cb(msg) {
 	case 'sta_connected':
 		if (data.psk_idx == null)
 			return;
-		return sta_auth_cache(data.iface, data.sta, data.psk_idx);
+		return sta_auth_cache(data.iface, data.sta, data.psk_idx, data.psk);
 	case 'reload':
 		netifd_reload();
 		reload_timer.set(5000);

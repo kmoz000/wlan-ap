@@ -19,7 +19,6 @@ platform_do_upgrade() {
 	cig,wf189|\
 	edgecore,eap105|\
 	sercomm,ap72tip|\
-	wallys,dr5332|\
 	qcom,ipq9574-ap-al02-c4|\
 	qcom,ipq9574-ap-al02-c15)
 		nand_upgrade_tar "$1"

@@ -1,11 +1,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ath12k-firmware
-PKG_MIRROR_HASH:=692c7d82b6a5206af8210c44a0c1fd903a6bb2037d7ed7956db71b9779169be6
+PKG_MIRROR_HASH:=a325f86b1d613f713d2e015abca4a9ff86c8448d4cd540fa022866da2c5aa042
 PKG_SOURCE_PROTO:=git
 PKG_BRANCH:=main
-PKG_SOURCE_URL:=https://github.com/kmoz000/upstream-wifi-fw.git
-PKG_SOURCE_VERSION:=572404654cbf392827b9b20a1ccec6e82b192c9c
+PKG_SOURCE_URL:=https://github.com/quic/upstream-wifi-fw.git
+PKG_SOURCE_VERSION:=e90d32aaa149800ea79760639cb5ac9ddcfc8281
 
 PKG_MAINTAINER:=John Crispin <john@phrozen.org>
 
@@ -48,25 +48,25 @@ endef
 
 define Package/ath12k-firmware-qcn92xx-split-phy/install
 	$(INSTALL_DIR) $(1)/lib/firmware/ath12k/QCN92XX/hw1.0
-	$(CP) $(PKG_BUILD_DIR)/ath12k-firmware/QCN9274/hw2.0_split_phy/1.3.1/WLAN.WBE.1.3.1-00130-QCAHKSWPL_SILICONZ-1/* \
+	$(CP) $(PKG_BUILD_DIR)/ath12k-firmware/QCN9274/hw2.0_split_phy/1.2.1/WLAN.WBE.1.2.1-00148-QCAHKSWPL_SILICONZ-1/* \
 		$(1)/lib/firmware/ath12k/QCN92XX/hw1.0
 endef
 
 define Package/ath12k-firmware-qcn92xx/install
 	$(INSTALL_DIR) $(1)/lib/firmware/ath12k/QCN92XX/hw1.0
-	$(CP) $(PKG_BUILD_DIR)/ath12k-firmware/QCN9274/hw2.0/1.3.1/WLAN.WBE.1.3.1-00130-QCAHKSWPL_SILICONZ-1/* \
+	$(CP) $(PKG_BUILD_DIR)/ath12k-firmware/QCN9274/hw2.0/1.2.1/WLAN.WBE.1.2.1-00201-QCAHKSWPL_SILICONZ-1/* \
 		$(1)/lib/firmware/ath12k/QCN92XX/hw1.0
 endef
 
 define Package/ath12k-firmware-ipq53xx/install
 	$(INSTALL_DIR) $(1)/lib/firmware/IPQ5332/
-	$(CP) $(PKG_BUILD_DIR)/ath12k-firmware/IPQ5322/hw1.0/1.3.1/WLAN.WBE.1.3.1-00130-QCAHKSWPL_SILICONZ-1/* \
+	$(CP) $(PKG_BUILD_DIR)/ath12k-firmware//IPQ5322/hw1.0/1.2.1/WLAN.WBE.1.2.1-00201-QCAHKSWPL_SILICONZ-1/* \
 		$(1)/lib/firmware/IPQ5332/
 endef
 
 define Package/ath12k-firmware-ipq53xx-wk-wk/install
 	$(INSTALL_DIR) $(1)/lib/firmware/IPQ5332/
-	$(CP) $(PKG_BUILD_DIR)/ath12k-firmware/IPQ5322_QCN6432_QCN6432/hw1.0/1.3.1/WLAN.WBE.1.3.1-00130-QCAHKSWPL_SILICONZ-1/* \
+	$(CP) $(PKG_BUILD_DIR)/ath12k-firmware/IPQ5322_QCN6432_QCN6432/hw1.0/testing/1.3/WLAN.WBE.1.3-02907-QCAHKSWPL_SILICONZ-1/* \
 		$(1)/lib/firmware/IPQ5332/
 endef
 

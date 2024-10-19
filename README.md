@@ -4,7 +4,6 @@ OpenWrt-based access point network operating system (AP NOS) for TIP OpenWiFi.
 Read more at [openwifi.tip.build](https://openwifi.tip.build/).
 
 ## Building
-[![Build OpenWrt/IsoHorns images](https://github.com/kmoz000/wlan-ap/actions/workflows/build-dev.yml/badge.svg)](https://github.com/kmoz000/wlan-ap/actions/workflows/build-dev.yml)
 
 ### Setting up your build machine
 
