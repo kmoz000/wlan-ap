@@ -49,7 +49,7 @@ define Device/wallys_dr5332
   DEVICE_VENDOR := Wallys
 	DEVICE_MODEL := DR5332
   DEVICE_DTS := ipq5332-wallys-dr5332
-  DEVICE_DTS_CONFIG := config@mi01.12
+  DEVICE_DTS_CONFIG := config@mi01.6
 	SOC := qcom-ipq5332
   DEVICE_PACKAGES := ath12k-wifi-qcom-qcn9274 ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
 endef
