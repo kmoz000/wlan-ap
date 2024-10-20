@@ -68,7 +68,7 @@ jobs:
     - name: List all .ipk and .bin files in ./
       run: |
         echo "Listing all .ipk and .bin files in openwrt/bin/:"
-        find . -type f \( -name "*.img" -o -name "*.bin" \)
+        find . -type f \( -name "*.tar.gz" -o -name "*.dtb" \)
     - name: Push to the latest release
       uses: softprops/action-gh-release@v2
       with:
@@ -78,10 +78,7 @@ jobs:
         files: |
           Release.txt
           openwrt/tmp/${{ steps.build_image.outputs.TAR_NAME }}
-          openwrt/tmp/${{ steps.build_image.outputs.IMG_NAME }}
-          openwrt/bin/targets/ipq5332/**/packages/ath12*
-          openwrt/bin/targets/ipq5332/**/*.img
-          openwrt/bin/targets/ipq5332/**/*.tar.gz
-          openwrt/bin/targets/ipq5332/**/*-upgrade.bin
+          openwrt/tmp/*.bin
+          openwrt/tmp/*.img
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
