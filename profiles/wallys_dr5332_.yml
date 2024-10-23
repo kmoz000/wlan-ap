@@ -1,0 +1,15 @@
+---
+profile: wallys_dr5332_
+target: ipq53xx
+subtarget: ipq53xx_32
+description: Build image for the Wally's DR5332
+image: bin/targets/ipq53xx/generic/openwrt-ipq53xx-wallys_dr5332-squashfs-sysupgrade.tar
+feeds:
+  - name: ipq95xx
+    path: ../../feeds/ipq95xx
+packages:
+  - ipq53xx_
+include:
+  - ucentral-ap
+diffconfig: |
+  CONFIG_KERNEL_IPQ_MEM_PROFILE=512
