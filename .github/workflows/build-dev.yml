@@ -68,7 +68,7 @@ jobs:
     - name: List all .ipk and .bin files in ./
       run: |
         echo "Listing all .ipk and .bin files in openwrt/bin/:"
-        find . -type f \( -name "*.tar.gz" -o -name "*.dtb" \)
+        find . -type f \( -name "*.bin" -o -name "*.img" \)
     - name: Push to the latest release
       uses: softprops/action-gh-release@v2
       with:
