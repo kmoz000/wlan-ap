@@ -1,17 +1,17 @@
 KERNEL_LOADADDR := 0x40080000
 
-# define Device/FitImage
-# 	KERNEL_SUFFIX := -fit-uImage.itb
-# 	KERNEL = kernel-bin | gzip | fit gzip $$(DTS_DIR)/$$(DEVICE_DTS).dtb
-# 	KERNEL_NAME := Image
-# endef
+define Device/FitImage
+	KERNEL_SUFFIX := -fit-uImage.itb
+	KERNEL = kernel-bin | gzip | fit gzip $$(DTS_DIR)/$$(DEVICE_DTS).dtb
+	KERNEL_NAME := Image
+endef
 
-# define Device/UbiFit
-# 	KERNEL_IN_UBI := 1
-# 	IMAGES := nand-factory.ubi nand-sysupgrade.bin
-# 	IMAGE/nand-factory.ubi := append-ubi
-# 	IMAGE/nand-sysupgrade.bin := sysupgrade-tar | append-metadata
-# endef
+define Device/UbiFit
+	KERNEL_IN_UBI := 1
+	IMAGES := nand-factory.ubi nand-sysupgrade.bin
+	IMAGE/nand-factory.ubi := append-ubi
+	IMAGE/nand-sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
 
 define Device/cig_wf189
   DEVICE_TITLE := CIG WF189
@@ -37,29 +37,44 @@ define Device/sercomm_ap72tip
 endef
 TARGET_DEVICES += sercomm_ap72tip
 
+define Device/wallys_nor
+	DEVICE_VENDOR := Wallys
+	BLOCKSIZE := 64k
+	IMAGE_SIZE := 32448k
+	KERNEL_NAME := vmlinux
+	KERNEL := kernel-bin | append-dtb-elf
+	IMAGES = sysupgrade.bin
+	IMAGE/sysupgrade.bin := append-kernel | kernel2minor -s 1024 | \
+		pad-to $$$$(BLOCKSIZE) | append-rootfs | pad-rootfs | \
+		append-metadata | check-size
+endef
+
 define Device/wallys_dr5332
-  DEVICE_TITLE := Wallys DR5332
-  DEVICE_DTS := ipq5332-wallys-dr5332
-  DEVICE_DTS_CONFIG := config@mi01.6
-  IMAGES := sysupgrade.tar nand-factory.bin nand-factory.ubi
-  IMAGE/sysupgrade.tar := sysupgrade-tar | append-metadata
-  IMAGE/nand-factory.bin := append-ubi | qsdk-ipq-factory-nand
-  IMAGE/nand-factory.ubi := append-ubi
+  $(call Device/wallys_nor)
+	DEVICE_MODEL := DR5332
+	SOC := qcom-ipq5332
   DEVICE_PACKAGES := ath12k-wifi-wallys-dr5332 ath12k-wifi-qcom-qcn9274 ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
 endef
 TARGET_DEVICES += wallys_dr5332
 
 define Device/wallys_dr5332_32
-  KERNEL_SUFFIX := -fit-uImage.itb
-	KERNEL = kernel-bin | gzip | fit gzip $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
-	KERNEL_NAME := Image
   DEVICE_TITLE := Wallys DR5332
   DEVICE_DTS := ipq5332-wallys-dr5332
-  DEVICE_DTS_CONFIG := config@mi01.2
-  KERNEL_IN_UBI := 1
-  IMAGES := nand-factory.ubi nand-sysupgrade.bin
-	IMAGE/nand-factory.ubi := append-ubi
-	IMAGE/nand-sysupgrade.bin := sysupgrade-tar | append-metadata
+  DEVICE_DTS_CONFIG := config@mi01.6
+  KERNEL_LOADADDR := 0x80208000
+  DEVICE_KERNEL_PARTSIZE := 4
+  DEVICE_ROOTFS_PARTSIZE := 28
+  MTDPARTS := "mtdparts=spi0.0:256k(u-boot)ro,64k(art)ro,1536k(kernel),-(ubi)"
+  BOOTARGS := "console=ttyMSM0,115200n8 root=/dev/ubiblock0_0 rootfstype=squashfs"
+  IMAGE_SIZE := 32448k
+	SOC := qcom-ipq5332
+  KERNEL_SUFFIX := -fit-zImage.itb
+	KERNEL = kernel-bin | fit none $$(DTS_DIR)/$$(DEVICE_DTS).dtb
+	KERNEL_NAME := zImage
+	IMAGES += factory.img
+	IMAGE/factory.img := append-kernel | pad-offset 64k 64 | append-uImage-fakehdr filesystem | append-rootfs | pad-rootfs
+	IMAGE/sysupgrade.bin := append-kernel | pad-offset 64k 64 | append-uImage-fakehdr filesystem | \
+		append-rootfs | pad-rootfs | append-metadata | check-size
   DEVICE_PACKAGES := ath12k-wifi-wallys-dr5332 ath12k-wifi-qcom-qcn9274 ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
 endef
 TARGET_DEVICES += wallys_dr5332_32

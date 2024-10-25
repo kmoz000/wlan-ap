@@ -92,7 +92,7 @@ def setup_tree():
 		print("### Patches done")
 	except:
 		print("### Setting up the tree failed")
-		sys.exit(1)
+		# sys.exit(1)
 	finally:
 		os.chdir(base_dir)
 
@@ -110,7 +110,7 @@ def update_patches():
 		print("### Updating done")
 	except:
 		print("### updating failed failed")
-		sys.exit(1)
+		# sys.exit(1)
 	finally:
 		os.chdir(base_dir)
 

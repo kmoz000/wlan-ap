@@ -1,6 +1,6 @@
 repo:  https://github.com/openwrt/openwrt.git
 branch: openwrt-23.05
-revision: e92cf0c46ffe3ac7fca936c18577bfb19eb4ce9e
+revision: 088bb1e12e07794dd3842df1d3b804f6550ea033
 output_dir: ./output
 
 patch_folders:
