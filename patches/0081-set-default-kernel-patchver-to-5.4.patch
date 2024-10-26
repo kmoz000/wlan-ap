@@ -1,0 +1,24 @@
+From eb9af38c9643cb0a8ff4edff329e339cca182c5e Mon Sep 17 00:00:00 2001
+From: kmoz000 <abdelkarim@ispapp.co>
+Date: Sat, 26 Oct 2024 02:40:55 +0100
+Subject: [PATCH] set default kernel patchver to 5.4
+
+---
+ include/kernel-version.mk | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/include/kernel-version.mk b/include/kernel-version.mk
+index 958ed9be0c..91621ca883 100644
+--- a/include/kernel-version.mk
++++ b/include/kernel-version.mk
+@@ -1,6 +1,7 @@
+ 
+ # Use the default kernel version if the Makefile doesn't override it
+ LINUX_RELEASE?=1
++KERNEL_PATCHVER ?= 5.4
+ 
+ ifdef CONFIG_TESTING_KERNEL
+   KERNEL_PATCHVER:=$(KERNEL_TESTING_PATCHVER)
+-- 
+2.34.1
+
