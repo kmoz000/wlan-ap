@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [ 'wallys_dr5332', 'wallys_dr5332_32', 'wallys_dr5332_' ]
+        target: [ 'wallys_dr5332', 'wallys_dr5332_32' ]
 
     steps:
     - uses: actions/checkout@v4
