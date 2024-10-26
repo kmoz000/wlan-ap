@@ -11,6 +11,7 @@ include:
   - qosify
 
 packages:
+  - iperf3
   - atfpolicy
   - kmod-batman-adv
   - batctl-default
@@ -45,7 +46,7 @@ packages:
   - rrmd
   - ucrun
   - ucode
-  - unetd
+  # - unetd
   - udhcpsnoop
   - udnssnoop
   - usteer

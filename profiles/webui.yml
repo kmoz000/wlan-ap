@@ -6,9 +6,9 @@ packages:
   - lua
   - luci-base
   - luci-lua-runtime
-  # - luci-mod-ucentral
+  - luci-mod-ucentral
   # - luci-theme-ucentral
-  - luci-mod-admin-full
+  # - luci-mod-admin-full
   - luci-theme-argon
   - luci-app-argon-config
   - rpcd
