@@ -10,6 +10,6 @@ feeds:
 packages:
   - ipq53xx
 include:
-  - ucentral-ap
+  - isohorns
 diffconfig: |
   CONFIG_KERNEL_IPQ_MEM_PROFILE=512
