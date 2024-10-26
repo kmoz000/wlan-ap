@@ -9,7 +9,6 @@ CPU_SUBTYPE:=neon-vfpv4
 MAINTAINER:=John Crispin <blogic@openwrt.org>
 SUBTARGETS:=generic 
 
-
 KERNELNAME:=zImage Image dtbs
 
 KERNEL_PATCHVER:=5.4
