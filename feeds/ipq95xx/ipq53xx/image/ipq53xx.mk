@@ -41,10 +41,16 @@ define Device/wallys_dr5332
   DEVICE_TITLE := Wallys DR5332
   DEVICE_DTS := ipq5332-wallys-dr5332
   DEVICE_DTS_CONFIG := config@mi01.2-qcn9160-c1
-  IMAGES := sysupgrade.tar nand-factory.bin nand-factory.ubi
-  IMAGE/sysupgrade.tar := sysupgrade-tar | append-metadata
-  IMAGE/nand-factory.bin := append-ubi | qsdk-ipq-factory-nand
-  IMAGE/nand-factory.ubi := append-ubi
+  DEVICE_VENDOR := Wallys
+	BLOCKSIZE := 64k
+	IMAGE_SIZE := 16128k
+	KERNEL_NAME := vmlinux
+	KERNEL := kernel-bin | append-dtb-elf
+	IMAGES = sysupgrade.bin
+	IMAGE/sysupgrade.bin := append-kernel | kernel2minor -s 1024 | \
+		pad-to $$$$(BLOCKSIZE) | append-rootfs | pad-rootfs | \
+		append-metadata | check-size
+  DEVICE_MODEL := DR5332
   DEVICE_PACKAGES := ath12k-wifi-wallys-dr5332 ath12k-wifi-qcom-qcn9274 ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
 endef
 TARGET_DEVICES += wallys_dr5332
