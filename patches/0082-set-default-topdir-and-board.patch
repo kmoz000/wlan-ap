@@ -1,0 +1,38 @@
+From 4a4978190ec8fd7666451e6a9ee8f53905d01544 Mon Sep 17 00:00:00 2001
+From: kmoz000 <abdelkarim@ispapp.co>
+Date: Sat, 26 Oct 2024 04:04:09 +0100
+Subject: [PATCH] set default topdir and board
+
+---
+ include/target.mk | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/include/target.mk b/include/target.mk
+index 3a17587e4e..1730d1e7b2 100644
+--- a/include/target.mk
++++ b/include/target.mk
+@@ -99,6 +99,21 @@ else
+     SUBTARGETS:=$(strip $(patsubst $(PLATFORM_DIR)/%/target.mk,%,$(wildcard $(PLATFORM_DIR)/*/target.mk)))
+   endif
+ endif
++# Set default paths if they are missing
++TOPDIR?=/home/runner/work/wlan-ap/wlan-ap/openwrt
++BOARD?=ipq53xx
++
++# Check if TOPDIR is set, and send a warning if it’s not
++ifndef TOPDIR
++  $(warning NB: TOPDIR is not set. Using default value: $(TOPDIR))
++endif
++
++# Check if BOARD is set, and send a warning if it’s not
++ifndef BOARD
++  $(warning NB: BOARD is not set. Using default value: $(BOARD))
++  PLATFORM_DIR:=$(firstword $(wildcard $(TOPDIR)/target/linux/feeds/$(BOARD) $(TOPDIR)/target/linux/$(BOARD)))
++  SUBTARGET:=$(strip $(foreach subdir,$(patsubst $(PLATFORM_DIR)/%/target.mk,%,$(wildcard $(PLATFORM_DIR)/*/target.mk)),$(if $(CONFIG_TARGET_$(call target_conf,$(BOARD)_$(subdir))),$(subdir))))
++endif
+ 
+ TARGETID:=$(BOARD)$(if $(SUBTARGET),/$(SUBTARGET))
+ PLATFORM_SUBDIR:=$(PLATFORM_DIR)$(if $(SUBTARGET),/$(SUBTARGET))
+-- 
+2.34.1
+
