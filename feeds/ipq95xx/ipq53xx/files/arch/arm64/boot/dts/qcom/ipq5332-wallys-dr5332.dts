@@ -21,7 +21,7 @@
 	 #address-cells = <0x2>;
 	 #size-cells = <0x2>;
 	 model = "DR5332";
-	 compatible = "wallys,dr5332", "qcom,ipq5332";
+	 compatible = "wallys,dr5332", "qcom,ipq5332-ap-mi01.2", "qcom,ipq5332-ap-mi01.2-qcn9160-c1", "qcom,ipq5332-ap-mi01.6", "qcom,ipq5332-ap-mi01.9", "qcom,ipq5332";
 	 interrupt-parent = <&intc>;
  
 	 aliases {
