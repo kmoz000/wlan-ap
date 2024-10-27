@@ -42,8 +42,8 @@ define Device/wallys_dr5332
 	KERNEL = kernel-bin | gzip | fit gzip $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
 	KERNEL_NAME := Image
   DEVICE_TITLE := Wallys DR5332
-  DEVICE_DTS := ipq5332-wallys-dr5332-mi01.2
-  DEVICE_DTS_CONFIG := config@mi01.2
+  DEVICE_DTS := ipq5332-wallys-dr5332
+  DEVICE_DTS_CONFIG := config@mi01.6
   KERNEL_IN_UBI := 1
   IMAGES := nand-factory.ubi nand-sysupgrade.bin
 	IMAGE/nand-factory.ubi := append-ubi | qsdk-ipq-factory-nand
