@@ -42,13 +42,13 @@ define Device/wallys_dr5332
 	KERNEL = kernel-bin | gzip | fit gzip $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
 	KERNEL_NAME := Image
   DEVICE_TITLE := Wallys DR5332
-  DEVICE_DTS := ipq5332-wallys-dr5332
-  DEVICE_DTS_CONFIG := config@mi01.6
+  DEVICE_DTS := ipq5332-wallys-dr5332-mi01.2-qcn9160-c1
+  DEVICE_DTS_CONFIG := config@mi01.2-qcn9160-c1
   KERNEL_IN_UBI := 1
   IMAGES := nand-factory.ubi nand-sysupgrade.bin
 	IMAGE/nand-factory.ubi := append-ubi | qsdk-ipq-factory-nand
 	IMAGE/nand-sysupgrade.bin := sysupgrade-tar | append-metadata
-  DEVICE_PACKAGES := ath12k-wifi-wallys-dr5332 ath12k-wifi-qcom-qcn9274 ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
+  DEVICE_PACKAGES := ath12k-wifi-wallys-dr5332 ipq5332-qcn9224-wifi-wallys-dr5332 ath12k-wifi-qcom-qcn9274 ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
 endef
 TARGET_DEVICES += wallys_dr5332
 
@@ -63,7 +63,7 @@ define Device/wallys_dr5332_32
   IMAGES := nand-factory.ubi nand-sysupgrade.bin
 	IMAGE/nand-factory.ubi := append-ubi | qsdk-ipq-factory-nand
 	IMAGE/nand-sysupgrade.bin := sysupgrade-tar | append-metadata
-  DEVICE_PACKAGES := ath12k-wifi-wallys-dr5332 ath12k-wifi-qcom-qcn9274 ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
+  DEVICE_PACKAGES := ath12k-wifi-wallys-dr5332 ipq5332-qcn9224-wifi-wallys-dr5332 ath12k-wifi-qcom-qcn9274 ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
 endef
 TARGET_DEVICES += wallys_dr5332_32
 

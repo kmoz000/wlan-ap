@@ -38,7 +38,7 @@ packages:
   - ratelimit
   - rtty-openssl
   - tcpdump
-  - tip-defaults
+  # - tip-defaults
   - tmate
   - udhcprelay
   - ufp
