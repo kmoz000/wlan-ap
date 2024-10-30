@@ -48,7 +48,7 @@ define Device/wallys_dr5332
   IMAGES := nand-factory.ubi nand-sysupgrade.bin
 	IMAGE/nand-factory.ubi := append-ubi | qsdk-ipq-factory-nand
 	IMAGE/nand-sysupgrade.bin := sysupgrade-tar | append-metadata
-  DEVICE_PACKAGES := ath12k-wifi-wallys-dr5332 ipq5332-qcn9224-wifi-wallys-dr5332 ath12k-wifi-qcom-qcn9274 ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
+  DEVICE_PACKAGES := ath12k-wifi-wallys-dr5332 ipq5332-qcn9224-wifi-qcom-qcn9274 ath12k-wifi-qcom-qcn9274 ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
 endef
 TARGET_DEVICES += wallys_dr5332
 
@@ -63,7 +63,7 @@ define Device/wallys_dr5332_32
   IMAGES := nand-factory.ubi nand-sysupgrade.bin
 	IMAGE/nand-factory.ubi := append-ubi | qsdk-ipq-factory-nand
 	IMAGE/nand-sysupgrade.bin := sysupgrade-tar | append-metadata
-  DEVICE_PACKAGES := ath12k-wifi-wallys-dr5332 ipq5332-qcn9224-wifi-wallys-dr5332 ath12k-wifi-qcom-qcn9274 ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
+  DEVICE_PACKAGES := ath12k-wifi-wallys-dr5332 ipq5332-qcn9224-wifi-qcom-qcn9274 ath12k-wifi-qcom-qcn9274 ath12k-firmware-qcn92xx-split-phy ath12k-firmware-ipq53xx
 endef
 TARGET_DEVICES += wallys_dr5332_32
 
