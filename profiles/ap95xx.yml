@@ -1,0 +1,15 @@
+---
+profile: ap95xx
+target: ipq95xx
+subtarget: generic
+description: Build image for the skynet wireless ap's
+image: bin/targets/ipq53xx/generic/openwrt-ipq95xx-ap95xx-squashfs-sysupgrade.tar
+feeds:
+  - name: ipq95xx
+    path: ../../feeds/ipq95xx
+packages:
+  - ipq95xx
+include:
+  - isohorns
+diffconfig: |
+  CONFIG_KERNEL_IPQ_MEM_PROFILE=512
