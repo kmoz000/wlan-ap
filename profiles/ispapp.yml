@@ -1,0 +1,8 @@
+---
+description: Add the ispapp dependencies
+feeds:
+  - name: ispapp
+    path: ../../feeds/ispapp
+
+packages:
+  - luci-app-ispapp

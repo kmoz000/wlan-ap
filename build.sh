@@ -24,4 +24,6 @@ cd -
 
 echo "### Building image ..."
 cd $BUILD_DIR
-make -j$(nproc) V=s
+make -j$(nproc) V=s tools/install
+make -j$(nproc) V=s toolchain/install
+make -j$(nproc) V=s make package/ispapp/luci-app-ispapp/compile

@@ -9,6 +9,7 @@ feeds:
     path: ../../feeds/ipq95xx
 include:
   - ucentral-ap
+  - ispapp
 packages:
   - ipq95xx
   - iperf3

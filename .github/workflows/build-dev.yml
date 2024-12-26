@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [ 'ap95xx' ]
+        target: [ 'qcom_al02-c15', 'qcom_al02-c4']
 
     steps:
     - uses: actions/checkout@v4
@@ -65,20 +65,20 @@ jobs:
     - name: Create Release.txt for reference
       run: echo ${{ github.sha }} > Release.txt
 
-    - name: List all .ipk and .bin files in ./
+    - name: List all .ipk and .apk files in ./
       run: |
         echo "Listing all .ipk and .bin files in openwrt/bin/:"
-        find . -type f \( -name "*.bin" -o -name "*.img" \)
+        find . -type f \( -name "*.ipk" -o -name "*.apk" \)
     - name: Push to the latest release
       uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ matrix.target }}
-        name: latest
+        name: ispapp
         make_latest: true
         files: |
-          Release.txt
-          openwrt/tmp/${{ steps.build_image.outputs.TAR_NAME }}
-          openwrt/tmp/*.bin
-          openwrt/tmp/*.img
+          openwrt/bin/packages/**/luci-app-ispapp*.ipk  
+          openwrt/bin/packages/**/luasec*.ipk 
+          openwrt/bin/packages/**/luci-lua-runtime*.ipk
+          openwrt/bin/packages/**/packages/luasocket*.ipk
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
