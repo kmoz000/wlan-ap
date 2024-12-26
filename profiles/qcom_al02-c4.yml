@@ -12,5 +12,6 @@ include:
 packages:
   - ipq95xx
   - iperf3
+  - luci-app-ispapp
 diffconfig: |
   CONFIG_KERNEL_IPQ_MEM_PROFILE=0

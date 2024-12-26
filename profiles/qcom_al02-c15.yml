@@ -9,5 +9,6 @@ feeds:
     path: ../../feeds/ipq95xx
 packages:
   - ipq95xx
+  - luci-app-ispapp
 diffconfig: |
   CONFIG_KERNEL_IPQ_MEM_PROFILE=0

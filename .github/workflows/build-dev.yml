@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [ 'ap95xx' ]
+        target: [ 'qcom_al02-c15', 'qcom_al02-c4']
 
     steps:
     - uses: actions/checkout@v4
