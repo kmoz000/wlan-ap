@@ -26,6 +26,7 @@ packages:
   - ethtool
   - ieee8021x
   - igmpproxy
+  - luci-app-ispapp
   - ip-bridge
   - kmod-sched-bpf
   - kmod-usb-acm
